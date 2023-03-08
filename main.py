@@ -1,3 +1,7 @@
+#Aseel ibrahim 
+# The GUI has a banner and a smoothie menu with a list of smoothies, and a fruit cup menu with a list of fruits. The program allows users to add items to a cart and calculates the total price of the items in the cart. Users can also remove items from the cart and place an order. When an order is placed, a confirmation window appears with a list of items ordered and the total price. If the cart is empty and the user tries to place an order, an error message appears. 
+#3/12/2023
+
 from PIL import Image, ImageTk
 import tkinter.messagebox as messagebox
 import tkinter as tk
@@ -44,13 +48,10 @@ if total_price_label is not None:
 
 # Define function to place order
 def place_order():
-    # Define total_price_label as a global variable
-    global total_price_label
     # Check if cart is empty
     if cart_listbox.size() == 0:
         messagebox.showerror("Error", "Your cart is empty. Please add items before placing an order.")
         return
-    
 
     # Create the 2nd window
     order_window = tk.Toplevel(root)
@@ -68,7 +69,6 @@ def place_order():
         item_label = tk.Label(frame, text=item)
         item_label.pack(padx=10, pady=5)
 
-
     # Calculate the total price of the items in the cart
     total_price = sum(float(item.split(" - $")[1]) for item in cart_listbox.get(0, tk.END))
 
@@ -77,9 +77,12 @@ def place_order():
     total_price_label.pack(padx=20, pady=20)
 
     # Display a message
-    message_label = tk.Label(order_window, text="Your order of has been placed!")
+    message_label = tk.Label(order_window, text="Your order has been placed!")
     message_label.pack(padx=20, pady=20)
 
+    # Create a button to go back to the main window
+    go_back_button = tk.Button(order_window, text="edit order", command=order_window.destroy)
+    go_back_button.pack(padx=20, pady=20)
 
 # Create the main window
 root = tk.Tk()
@@ -106,8 +109,8 @@ banner_frame.paste(banner_image, (100, 0))
 # Convert the banner frame to a Tkinter PhotoImage object
 banner_photo = ImageTk.PhotoImage(banner_frame)
 
-# Create a label for the banner and display it
-banner_label = tk.Label(root, image=banner_photo)
+# Create a label for the banner and display it WITH ALT TEXT
+banner_label = tk.Label(root, image=banner_photo, text="Smoothies banner")
 banner_label.grid(row=0, column=0, columnspan=3, sticky="nsew")
 
 # Create label for smoothie menu
@@ -220,8 +223,8 @@ cart_label.grid(row=1, column=1, padx=20, pady=20)
 photo_image = Image.open("images/photpeaphoto.jpg").resize((600, 200))
 photo_image = ImageTk.PhotoImage(photo_image)
 
-# Create a label with the image as its content
-photo_label = tk.Label(root, image=photo_image)
+# Create a label with the image as its content and add alternate text
+photo_label = tk.Label(root, image=photo_image, text="Photo of a peach on a tree")
 photo_label.grid(row=4, column=1, padx=20, pady=20, rowspan=2)
 
 # Create listbox for cart
