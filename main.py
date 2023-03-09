@@ -13,8 +13,6 @@ fruitcup_prices = {"Strawberries": 1.99, "Bananas": 0.99, "Mango": 2.99, "Pineap
 # Define global variable for total price label
 total_price_label = None
 
-
-# Define function to add item to cart
 def add_to_cart(item):
     # Get the price of the item
     if item in smoothie_prices:
@@ -23,28 +21,24 @@ def add_to_cart(item):
         price = fruitcup_prices[item]
     else:
         price = 0
-
     # Add the item and price to the cart listbox
     cart_listbox.insert(tk.END, f"{item} - ${price:.2f}")
-
     # Calculate the total price of the items in the cart
     total_price = sum(float(item.split(" - $")[1]) for item in cart_listbox.get(0, tk.END))
-
     # Update the total price label
-    total_price_label.config(text=f"Total Price: ${total_price:.2f}")
-
+    global total_price_label
+    if total_price_label is not None:
+        total_price_label.config(text=f"Total Price: ${total_price:.2f}")
 
 # Define function to remove item from cart
 def remove_from_cart():
     # Delete the currently selected item in the cart listbox
     cart_listbox.delete(tk.ANCHOR)
-
     # Calculate the total price of the items in the cart
     total_price = sum(float(item.split(" - $")[1]) for item in cart_listbox.get(0, tk.END))
-
     # Update the total price label
-if total_price_label is not None:
-    total_price_label.config(text=f"Total Price: ${total_price:.2f}")
+    if total_price_label is not None:
+        total_price_label.config(text=f"Total Price: ${total_price:.2f}")
 
 # Define function to place order
 def place_order():
@@ -95,6 +89,7 @@ root.title("SimpleSmoothies")
 
 # Load the banner and logo images and resize the banner
 banner_image = Image.open("images/smoothiesbanner.jpg").resize((1200, 130))
+
 logo_image = Image.open("images/logo.png").resize((100, 100))
 
 # Create a new image with the desired dimensions
@@ -130,12 +125,10 @@ for smoothie in smoothies:
 def add_selected_smoothie_to_cart():
     # Get the index of the selected item in the listbox
     selected_item_index = smoothie_listbox.curselection()
-
     # Check if an item has been selected
     if selected_item_index:
         # Get the selected item from the listbox
         selected_item = smoothie_listbox.get(selected_item_index)
-
         # Call the add_to_cart function with the selected item as an argument
         add_to_cart(selected_item)
 
@@ -147,23 +140,13 @@ def on_enter_smoothie_button(event):
 def on_leave_smoothie_button(event):
     smoothie_add_button.config(bg="white")
 
-# Create the "Add to Cart" button for smoothies
-smoothie_add_button = tk.Button(
-    root,
-    text="Add to Cart",
-    bg="white",
-    fg="green",
-    # Assign the add_selected_smoothie_to_cart function to the button's command
-    command=add_selected_smoothie_to_cart
-)
-
+# Create the "Add to Cart" button for smoothies and assign the add_selected_smoothie_to_cart function to the button's command
+smoothie_add_button = tk.Button(root,text="Add to Cart",bg="white",fg="green",command=add_selected_smoothie_to_cart)
 # Bind the "<Enter>" and "<Leave>" events to the button
 smoothie_add_button.bind("<Enter>", on_enter_smoothie_button)
 smoothie_add_button.bind("<Leave>", on_leave_smoothie_button)
-
 # Add the button to the grid
 smoothie_add_button.grid(row=3, column=0, padx=20, pady=10)
-
 
 # Create label for fruit cup menu
 fruitcup_label = tk.Label(root, text="Fruit Cup Menu", font= ("Arial", 16,), background="#ADD8E6")
@@ -181,12 +164,10 @@ for fruitcup in fruitcup:
 def add_selected_fruitcup_to_cart():
     # Get the index of the selected item in the listbox
     selected_item_index = fruitcup_listbox.curselection()
-
     # Check if an item has been selected
     if selected_item_index:
         # Get the selected item from the listbox
         selected_item = fruitcup_listbox.get(selected_item_index)
-
         # Call the add_to_cart function with the selected item as an argument
         add_to_cart(selected_item)
 
@@ -198,20 +179,12 @@ def on_enter_fruitcup_button(event):
 def on_leave_fruitcup_button(event):
     fruitcup_add_button.config(bg="white")
 
-# Create the "Add to Cart" button for smoothies
-fruitcup_add_button = tk.Button(
-    root,
-    text="Add to Cart",
-    bg="white",
-    fg="green",
-    # Assign the add_selected_fruitcup_to_cart function to the button's command
-    command=add_selected_fruitcup_to_cart
-)
+# Create the "Add to Cart" button for smoothies and assign the add_selected_fruitcup_to_cart function to the button's command
+fruitcup_add_button = tk.Button(root,text="Add to Cart",bg="white",fg="green",command=add_selected_fruitcup_to_cart)
 
 # Bind the "<Enter>" and "<Leave>" events to the button
 fruitcup_add_button.bind("<Enter>", on_enter_fruitcup_button)
 fruitcup_add_button.bind("<Leave>", on_leave_fruitcup_button)
-
 # Add the button to the grid
 fruitcup_add_button.grid(row=6, column=0, padx=20, pady=20)
 
@@ -237,7 +210,6 @@ remove_from_cart_button.grid(row=3, column=1, padx=20, pady=20)
 
 # Create place order button
 place_order_button = tk.Button(root, text="Place Order", bg="green", fg="white", font=("Arial", 14), command=place_order)
-
 # Place the button in the grid
 place_order_button.grid(row=3, column=2, padx=20, pady=20)
 
