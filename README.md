@@ -14,7 +14,9 @@ How to Use the Program
 To use the program, select the items you want to order from the smoothie and fruit cup menus. Click the "Add to Cart" button to add an item to your cart. The total price of your order will be displayed at the bottom of the window. To remove an item from your cart, select the item in the cart list and click the "Remove Item" button. To place your order, click the "Place Order" button. If your cart is empty and you try to place an order, an error message will appear.
 
 License
+
 This code is licensed under the MIT license.
 
 Credits
+
 This program was created by Aseel Ibrahim.
