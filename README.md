@@ -1,4 +1,4 @@
-SimpleSmoothies
+#SimpleSmoothies
 SimpleSmoothies is a program that allows users to order smoothies and fruit cups. The program features a graphical user interface with a banner and menus for smoothies and fruit cups. Users can add items to a cart and calculate the total price of their order. They can also remove items from the cart and place an order. When an order is placed, a confirmation window appears with a list of items ordered and the total price. If the cart is empty and the user tries to place an order, an error message appears.
 
 How to Run the Program
